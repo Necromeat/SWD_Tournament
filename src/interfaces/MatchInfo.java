@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package swdesign.tournament;
+package interfaces;
 
 import swdesign.game.GameInstance.Result;
 

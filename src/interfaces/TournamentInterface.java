@@ -15,9 +15,13 @@ import java.util.Map;
  */
 public interface TournamentInterface<E,B>  {
     
-    public void startTournament(B gametype,E[] players);
+    public void startTournament(B gametype,List<E> players);
     public List<Enum> getResults();
     public int getTourmantID();
-    
+    public void setTournamentName(String Tournamentname);
+    public String getTourmantName();
+    public Map<String,ParticipantInfo> getParticipants();
+    public List<E> sortByHighestScore(List<E> e);
+   
     
 }

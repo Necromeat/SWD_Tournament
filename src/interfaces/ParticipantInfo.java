@@ -16,4 +16,5 @@ public interface ParticipantInfo extends AIInfo
 {
     public int getScore();
     public void updateScore(int score);
+    
 }

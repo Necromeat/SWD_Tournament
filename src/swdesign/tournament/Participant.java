@@ -6,16 +6,17 @@
 
 package swdesign.tournament;
 
+import java.util.Comparator;
 import swdesign.game.AI;
-import swdesign.game.GameInstance;
 
 /**
  *
  * @author Andrew
  */
-public class Participant implements interfaces.ParticipantInfo{
+public class Participant implements Comparable,interfaces.ParticipantInfo{
     protected AI aiDecorator;
     private int score;
+    
     public Participant(AI ai){
         this.aiDecorator = ai;
     }
@@ -42,7 +43,34 @@ public class Participant implements interfaces.ParticipantInfo{
         this.score = score;
     }
 
+    @Override
+    public int compareTo(Object t) {
+      Participant a = (Participant)t;
+        Participant b = this;
+        if(a.getScore()> b.getScore()){
+            return -1;
+        }else{
+            if(b.getScore()>a.getScore()){
+                return 1;
+            }else{
+                return 0;
+            }
+        }
+             
+    }
+
+    @Override
+    public String toString() {
+        return "Participant{" + "aiDecorator=" + aiDecorator + ", score=" + score + '}';
+    }
+    
+        
+ 
+
+    
+
+
+    }
+
     
     
-    
-}

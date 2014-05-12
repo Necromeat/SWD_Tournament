@@ -33,13 +33,17 @@ public class SWDesignFinalProject<E>
         StupidNumberPlayer b = new ConstantPlayer("b", "b", 9);
         StupidNumberPlayer c = new ConstantPlayer("c", "c", 8);
         StupidNumberPlayer d = new  ConstantPlayer("d", "d", 7);
+        StupidNumberPlayer e = new  ConstantPlayer("e", "e", 6);
+        StupidNumberPlayer z = new  ConstantPlayer("z", "z", 5);
        ArrayList<StupidNumberPlayer> list = new ArrayList<>();
-       Map<String,ParticipantInfo> map = new HashMap();
        list.add(a);
        list.add(b);
        list.add(c);
        list.add(d);
-        StupidNumberGame game = new StupidNumberGame(1000000000);
+       list.add(e);
+       list.add(z);
+       
+        StupidNumberGame game = new StupidNumberGame(10);
         Tournament<StupidNumberPlayer,StupidNumberGame> Khaan = new Tournament<>();
         Khaan.startTournament(game, list);
        
@@ -47,8 +51,8 @@ public class SWDesignFinalProject<E>
             System.out.println(s);
         }
        
-        map = Khaan.getParticipants();
-        for (ParticipantInfo fd: map.values()) {
+        
+        for (ParticipantInfo fd: Khaan.getParticipants()) {
             System.out.println(fd.getID()+":"+fd.getScore());
         }
  

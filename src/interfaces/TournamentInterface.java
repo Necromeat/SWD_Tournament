@@ -20,8 +20,8 @@ public interface TournamentInterface<E,B>  {
     public int getTourmantID();
     public void setTournamentName(String Tournamentname);
     public String getTourmantName();
-    public Map<String,ParticipantInfo> getParticipants();
-    public List<E> sortByHighestScore(List<E> e);
+    public List<ParticipantInfo> getParticipants();
+   
    
     
 }

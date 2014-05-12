@@ -16,7 +16,7 @@ import swdesign.game.GameInstance.Result;
  *
  * @author Andrew
  */
-public class Match implements interfaces.MatchInfo{
+public class  Match implements Runnable,interfaces.MatchInfo {
     private int id = 0;
     private AI player1, player2;
     private int player1Score = 0
@@ -24,6 +24,7 @@ public class Match implements interfaces.MatchInfo{
     private Game game;
     private boolean hasFinished;
     private Participant playera, playerb;
+    Result result;
     
     public Match(AI a,AI b, Game g){
         this.player1 = a;
@@ -60,14 +61,6 @@ public class Match implements interfaces.MatchInfo{
 
     @Override
     public GameInstance.Result getResult() {
-       Result result = null;
-    if(!hasFinished){
-      result=game.newInstance().playGame(player1, player2);
-      setPlayerScore(result);
-      playera.updateScore(player1Score);
-      playerb.updateScore(player2Score);
-      hasFinished = true;
-    }
        
         return result;
     }
@@ -83,7 +76,21 @@ public class Match implements interfaces.MatchInfo{
          player2Score++;
         }
     }
+
+    @Override
+    public void run() {
+       while(!hasFinished){
+        playgame();
+       hasFinished = true;
+       }
+       
+    }
     
-   
+   public synchronized void playgame(){
+        result=game.newInstance().playGame(player1, player2);
+      setPlayerScore(result);
+      playera.updateScore(player1Score);
+      playerb.updateScore(player2Score); 
+   }
     
 }

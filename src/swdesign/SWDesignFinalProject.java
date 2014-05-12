@@ -39,7 +39,7 @@ public class SWDesignFinalProject<E>
        list.add(b);
        list.add(c);
        list.add(d);
-        StupidNumberGame game = new StupidNumberGame(10);
+        StupidNumberGame game = new StupidNumberGame(1000000000);
         Tournament<StupidNumberPlayer,StupidNumberGame> Khaan = new Tournament<>();
         Khaan.startTournament(game, list);
        

@@ -6,6 +6,8 @@
 
 package interfaces;
 
+import swdesign.game.AI;
+
 /**
  *
  * @author tog
@@ -16,4 +18,6 @@ public interface TournamentUI
     public void matchStarted(int matchIndex);
     public void matchFinished(int matchIndex);
     public void tournamentFinished(ParticipantInfo[] sortedParticipants);
+    public void addPlayer(AI ai);
+    public enum Commands{GameInfo,Start,addPlayer};
 }

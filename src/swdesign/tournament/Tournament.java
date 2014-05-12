@@ -6,6 +6,7 @@
 package swdesign.tournament;
 
 import interfaces.ParticipantInfo;
+import static java.lang.Runtime.getRuntime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -69,13 +70,15 @@ public class Tournament<E, B> implements interfaces.TournamentInterface<E, B> {
     }
 
     private void playMatches() {
+        Runner run = new Runner();
         for (int i = 0; i < playersArray.size(); i++) 
     {
             for (int j = i+1; j < playersArray.size(); j++){
               if(!playersArray.get(i).getID().equals(playersArray.get(j).getID())){
                   match = new Match(playersArray.get(i),playersArray.get(j),game);
+               
+                  run.execute(match);
                   
-                   if (!match.hasFinished()) {
                         results.add(match.getResult());
                         if(!playerInfoArray.containsKey(playersArray.get(i).getID())&&!playerInfoArray.containsKey(playersArray.get(j).getID())){
                             playerInfoArray.put(playersArray.get(i).getID(), match.getParticipantA());
@@ -93,7 +96,7 @@ public class Tournament<E, B> implements interfaces.TournamentInterface<E, B> {
                            
                               }
                                 }
-                        }
+                        
                        
                         
                         
@@ -108,7 +111,7 @@ public class Tournament<E, B> implements interfaces.TournamentInterface<E, B> {
         }
         
       }
-    
+        
     }
 
    

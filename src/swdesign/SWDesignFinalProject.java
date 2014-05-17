@@ -8,9 +8,6 @@ package swdesign;
 
 import interfaces.ParticipantInfo;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import swdesign.examplegames.stupidnumbergame.StupidNumberGame;
 import swdesign.examplegames.stupidnumbergame.StupidNumberPlayer;
 import swdesign.examplegames.stupidnumbergame.players.ConstantPlayer;

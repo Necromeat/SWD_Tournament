@@ -35,8 +35,8 @@ public class  Match implements Runnable,interfaces.MatchInfo {
         this.playera = new Participant(a);
         this.playerb = new Participant(b);
         
-    }
-    
+    } 
+       
     @Override
     public int matchID() {
         return id;
@@ -87,10 +87,14 @@ public class  Match implements Runnable,interfaces.MatchInfo {
     }
     
    public synchronized void playgame(){
+       System.out.println("Game Starting between: " + player1.getName()+" And " +player2.getName());
         result=game.newInstance().playGame(player1, player2);
       setPlayerScore(result);
       playera.updateScore(player1Score);
       playerb.updateScore(player2Score); 
+      
+     System.out.println("Game finished between: " + player1.getName()+" And " +player2.getName());
+     System.out.println("Result : " +result);
    }
     
 }

@@ -6,7 +6,6 @@
 
 package interfaces;
 
-import java.util.List;
 import swdesign.game.AI;
 
 /**
@@ -15,10 +14,10 @@ import swdesign.game.AI;
  */
 public interface TournamentUI
 {
-    public void tournamentStart(String gameName, List<ParticipantInfo> participants, MatchInfo[] matches);
-    public void matchStarted(int matchIndex);
-    public void matchFinished(int matchIndex);
-    public void tournamentFinished(List<ParticipantInfo> sortedParticipants);
+    
     public void addPlayer(AI ai);
-    public enum Commands{GameInfo,Start,addPlayer};
+    public enum Commands{GameInfo,Start,addPlayer,Stop,Help};
+    public enum GameTypes{StupidNumberGame};
+    public enum PlayerTypes{RandomNumberPlayer,ConstantNumberPlayer};
+    
 }

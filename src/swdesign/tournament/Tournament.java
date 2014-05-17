@@ -6,11 +6,15 @@
 package swdesign.tournament;
 
 import interfaces.ParticipantInfo;
+import java.io.IOException;
+import static java.lang.Runtime.getRuntime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import swdesign.game.AI;
 import swdesign.game.Game;
 
@@ -25,7 +29,8 @@ public class Tournament<E, B> implements interfaces.TournamentInterface<E, B> {
     private ArrayList<AI> playersArray = new ArrayList();
     private final List<Enum> results = new ArrayList();
     private Map<String, ParticipantInfo> playerInfoArray = new HashMap<>();
-    private Map<String, ParticipantInfo> playerInfoArrayOut = new HashMap<>();
+    private ArrayList<Match> matches = new ArrayList<>();
+    
     private int id = 0;
     private Game game;
 
@@ -34,7 +39,9 @@ public class Tournament<E, B> implements interfaces.TournamentInterface<E, B> {
 
         this.game = (Game) gametype;
         playersArray = (ArrayList) players;
-        playMatches();
+ 
+            playMatches();
+          
 
     }
 
@@ -64,36 +71,22 @@ public class Tournament<E, B> implements interfaces.TournamentInterface<E, B> {
         this.tournamentName = tournamentname;
     }
 
-    private void playMatches() {
+    private void playMatches(){
+        Runtime r = getRuntime();
         Runner run = new Runner();
         for (int i = 0; i < playersArray.size(); i++) {
             for (int j = i + 1; j < playersArray.size(); j++) {
                 if (!playersArray.get(i).getID().equals(playersArray.get(j).getID())) {
                     match = new Match(playersArray.get(i), playersArray.get(j), game);
-
+                    matches.add(match);
+                
                     run.execute(match);
-
-                    results.add(match.getResult());
-                    if (!playerInfoArray.containsKey(playersArray.get(i).getID()) && !playerInfoArray.containsKey(playersArray.get(j).getID())) {
-                        playerInfoArray.put(playersArray.get(i).getID(), match.getParticipantA());
-                        playerInfoArray.put(playersArray.get(j).getID(), match.getParticipantB());
-
-                    } else {
-                        if (playerInfoArray.containsKey(playersArray.get(i).getID()) && !playerInfoArray.containsKey(playersArray.get(j).getID())) {
-                            playerInfoArray.get(playersArray.get(i).getID()).updateScore(playerInfoArray.get(playersArray.get(i).getID()).getScore() + match.getParticipantA().getScore());
-                            playerInfoArray.put(playersArray.get(j).getID(), match.getParticipantB());
-
-                        } else {
-                            if (playerInfoArray.containsKey(playersArray.get(i).getID()) && playerInfoArray.containsKey(playersArray.get(j).getID())) {
-                                playerInfoArray.get(playersArray.get(i).getID()).updateScore(playerInfoArray.get(playersArray.get(i).getID()).getScore() + match.getParticipantA().getScore());
-                                playerInfoArray.get(playersArray.get(j).getID()).updateScore(playerInfoArray.get(playersArray.get(j).getID()).getScore() + match.getParticipantB().getScore());
-
-                            }
-                        }
+                    updateResults(playersArray.get(i),playersArray.get(j), match);
+                 
 
                         id++;
 
-                    }
+                    
                 }
             }
 
@@ -114,6 +107,31 @@ public class Tournament<E, B> implements interfaces.TournamentInterface<E, B> {
        return (List)list2;
      
    }
+   
+   private void updateResults(AI a, AI b, Match match){
+          results.add(match.getResult());
+          
+                    if (!playerInfoArray.containsKey(a.getID()) && !playerInfoArray.containsKey(b.getID())) {
+                        playerInfoArray.put(a.getID(), match.getParticipantA());
+                        playerInfoArray.put(b.getID(), match.getParticipantB());
 
+                    } else {
+                        if (playerInfoArray.containsKey(a.getID()) && !playerInfoArray.containsKey(b.getID())) {
+                            playerInfoArray.get(a.getID()).updateScore(playerInfoArray.get(a.getID()).getScore() + match.getParticipantA().getScore());
+                            playerInfoArray.put(b.getID(), match.getParticipantB());
+
+                        } else {
+                            if (playerInfoArray.containsKey(a.getID()) && playerInfoArray.containsKey(b.getID())) {
+                                playerInfoArray.get(a.getID()).updateScore(playerInfoArray.get(a.getID()).getScore() + match.getParticipantA().getScore());
+                                playerInfoArray.get(b.getID()).updateScore(playerInfoArray.get(b.getID()).getScore() + match.getParticipantB().getScore());
+
+                            }
+                        }
+   }
+   }
+   
+   
+       
+  
 }   
 

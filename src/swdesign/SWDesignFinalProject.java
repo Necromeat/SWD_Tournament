@@ -51,11 +51,12 @@ public class SWDesignFinalProject<E>
         Khaan.startTournament(game, list);
            
        
-        
+        int score = 0;
         for (ParticipantInfo fd: Khaan.getParticipants()) {
             System.out.println(fd.getID()+":"+fd.getScore());
+            score = score+fd.getScore();
         }
- 
+        System.out.println("Total score " + score);
     }
     
 }

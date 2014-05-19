@@ -149,7 +149,7 @@ public class ui implements interfaces.TournamentUI{
     @Override
     public void showResults(List<ParticipantInfo> results) {
         for(ParticipantInfo pi : results){
-            System.out.println("Player"+pi.getName()+" Score: "+pi.getScore());
+            System.out.println("Player "+pi.getName()+" Score: "+pi.getScore());
         }
         
     }
